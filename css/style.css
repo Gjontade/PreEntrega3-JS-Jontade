@@ -1,0 +1,36 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #75c2f6;
+	margin: 1rem;
+}
+
+nav div {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+div .logoPrincipal {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+h1 {
+	color: #f4d160;
+	-webkit-text-stroke: 1.5px black;
+	padding-left: 5px;
+	margin-top: 2px;
+}
+
+h2 {
+	margin: 1rem;
+	text-align: center;
+	color: #f4d160;
+	-webkit-text-stroke: 1px black;
+}
