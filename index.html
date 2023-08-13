@@ -16,7 +16,7 @@
 			rel="shortcut icon"
 			href="./img/logo-principal.png"
 			type="image/x-icon" />
-		<!-- <title>Cine+</title> -->
+		<title>Cine+</title>
 	</head>
 	<body>
 		<header>
@@ -35,26 +35,92 @@
 			</nav>
 		</header>
 
-		<main>
+		<main class="container-fluid">
 			<section>
 				<h2>Bienvenido/a a Cine+</h2>
-				<p id="respuestaSaludar"></p>
+				<div class="input-group mb-3" style="width: 35%" id="respuesta">
+					<input
+						type="text"
+						class="form-control"
+						placeholder="Ingrese su nombre"
+						aria-label="ingrese su nombre"
+						aria-describedby="button-addon2"
+						id="nombreInput" />
+					<button type="button" class="btn btn-outline-primary" id="registro">
+						Enviar
+					</button>
+				</div>
 			</section>
-			<div>
-				<button type="button" class="btn btn-warning" id="seleccionar">
-					¡Seleccionar Pelicula!
-				</button>
-				<button type="button" class="btn btn-outline-warning" id="seleccionarCandy">
-					Candy
-				</button>
-				<button type="button" class="btn btn-outline-success" id="azar">
-					¡Proba Suerte!
-				</button>
-				<br /><br />
-				<p id="respuestaPelicula"></p>
-				<p id="respuestaAsientos"></p>
-				<p id="respuestaCandy"></p>
-			</div>
+			<section>
+				<div class="form" style="width: 20%">
+					<form class="d-inline-block" id="miFormulario">
+						<select
+							class="form-select mb-3"
+							aria-label="Floating label select example"
+							id="seleccionar">
+							<option selected>Selecciona una pelicula:</option>
+							<option value="Jurassic Park">Jurassic Park</option>
+							<option value="Rocky">Rocky</option>
+							<option value="Titanic">Titanic</option>
+							<option value="Top Gun">Top Gun</option>
+							<option value="Mision Imposible">Mision Imposible</option>
+							<option value="Karate Kid">Karate Kid</option>
+						</select>
+						<input
+							type="number"
+							class="form-control border border-warning border-5 mb-3"
+							placeholder="Asientos: (c/u $500)"
+							min="1"
+							style="width: 85%" 
+							id="cantAsientos"/>
+						<button type="submit" class="btn btn-primary mb-3">confirmar</button>
+					</form>
+					<button type="button" class="btn btn-outline-success mb-3" id="azar">
+						¡Proba Suerte!
+					</button>
+					<button
+						type="button"
+						class="btn btn-outline-warning mb-3"
+						id="seleccionarCandy">
+						Candy
+					</button>
+				</div>
+				
+				<div>
+					<p id="respuestaPelicula"></p>
+					<p id="respuestaAsientos"></p>
+					<p id="respuestaCandy"></p>
+				</div>
+			</section>
+
+			<section>
+				<div class="container-fluid d-flex justify-content-around flex-wrap">
+					<img
+						src="./img/cartelera-jp.webp"
+						alt="cartelera pelicula"
+						class="col-3 imgCine" />
+					<img
+						src="./img/cartelera-rocky.webp"
+						alt="cartelera pelicula"
+						class="col-3 imgCine" />
+					<img
+						src="./img/cartelera-titanic.webp"
+						alt="cartelera pelicula"
+						class="col-3 imgCine" />
+					<img
+						src="./img/cartelera-topgun.webp"
+						alt="cartelera pelicula"
+						class="col-3 imgCine" />
+					<img
+						src="./img/cartelera-mi3.webp"
+						alt="cartelera pelicula"
+						class="col-3 imgCine" />
+					<img
+						src="./img/cartelera-karatekid.webp"
+						alt="cartelera pelicula"
+						class="col-3 imgCine" />
+				</div>
+			</section>
 		</main>
 
 		<footer></footer>

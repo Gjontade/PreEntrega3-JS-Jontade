@@ -1,77 +1,118 @@
 // Declaracion de variables | Objetos | Array:
 const precioEntrada = 500;
-const cartelera = ["Jurassic Park", "Rocky", "Titanic"];
-const respSaludar = document.getElementById("respuestaSaludar");
-const respPeliculas = document.getElementById("respuestaPelicula");
-const respAsientos = document.getElementById("respuestaAsientos");
 const respCandy = document.getElementById("respuestaCandy");
 const respAzar = document.getElementById("respuestaPelicula");
 
 let pelicula, asientos;
 let frase1, frase2, frase3, frase4;
 
+//Array de obj (peliculas)
+const cartelera = [
+	{
+		foto: "./img/cartelera-jp.webp",
+		nombre: "JURASSIC PARK",
+		director: "Steven Spielberg",
+		duracion: "2h 7min",
+		genero: "Accion/Aventura/SciFy",
+	},
+	{
+		foto: "./img/cartelera-rocky.webp",
+		nombre: "ROCKY",
+		director: "John G. Avildsen",
+		duracion: "2h",
+		genero: "Drama/Deporte",
+	},
+	{
+		foto: "./img/cartelera-titanic.webp",
+		nombre: "TITANIC",
+		director: "James Cameron",
+		duracion: "3h 14min",
+		genero: "Drama/Romance",
+	},
+	{
+		foto: "./img/cartelera-topgun.webp",
+		nombre: "KARATE KID",
+		director: "John G. Avildsen",
+		duracion: "2h 6min",
+		genero: "Accion/Drama/Familiar",
+	},
+	{
+		foto: "./img/cartelera-mi3.webp",
+		nombre: "TOP GUN",
+		director: "Tony Scott",
+		duracion: "1h 49min",
+		genero: "Accion/Drama",
+	},
+	{
+		foto: "./img/cartelera-karatekid.webp",
+		nombre: "MISION IMPOSIBLE",
+		director: "J.J. Abrams",
+		duracion: "2h 6min",
+		genero: "Accion/Aventura/Suspenso",
+	},
+];
+
+//Array de obj (candy)
 const itemsDisponibles = [
 	{
 		producto: "Pochoclos",
-		precio: 200
+		precio: 200,
 	},
 	{
 		producto: "Chocolate",
-		precio: 50
+		precio: 50,
 	},
 	{
 		producto: "Gaseosa",
-		precio: 150
+		precio: 150,
 	},
 	{
 		producto: "Agua",
-		precio: 100
-	}
+		precio: 100,
+	},
 ];
 
-// Funciones:
+//	-----Funciones:-----
+//Funcion valor Total Asientos
 function valor(a, b) {
-	frase2 = "Cantidad de entradas: " + b + ". Valor total: <strong>$" + a * b + "</strong>.";
-	respAsientos.innerHTML = frase2;
+	return a * b
 }
 
+//Funcion Registro
 function saludar() {
-	let saludo = prompt("Bienvenido/a a Cine+. Como te llamas?").toUpperCase();
+	let nombreInput = document.getElementById("nombreInput");
+	let saludo = nombreInput.value.toUpperCase();
+	let respuestaSaludar = document.getElementById("respuesta");
+
 	if (saludo === "") {
 		alert("Debe ingresar un nombre para continuar con la reserva.");
-		return; // return interrumpe la ejecucion
-	} else {
-		const mensaje = "¡Hola <strong>" + saludo + "</strong>! Puedes seleccionar una película de nuestro catálogo." + "<br>" + "(Si no sabes cual elegir, podes probar suerte 🍀)";
-		respSaludar.innerHTML = mensaje;
-	}
-}
-
-function comprarEntradas() {
-	let pelicula = prompt("Selecciona la pelicula: Jurassic Park | Rocky | titanic").toUpperCase();
-	
-
-	if (pelicula === "JURASSIC PARK" || pelicula === "ROCKY" || pelicula === "TITANIC") {
-		frase1 = "La pelicula seleccionada es: <strong>" + pelicula + "</strong>.";
-		respPeliculas.innerHTML = frase1;
-	} else {
-		alert("¡Comando Incorrecto!");
 		return;
+	} else {
+		const mensaje =
+			"<strong>¡HOLA " +
+			saludo +
+			"!</strong>" +
+			"<br>" +
+			"Puedes seleccionar una película de nuestro catálogo." +
+			"<br>" +
+			"(Si no sabes cual elegir, podes probar suerte 🍀)";
+		respuestaSaludar.innerHTML = mensaje;
 	}
-
-	asientos = Number(prompt("Cantidad de asientos: (valor: $500 c/u)"));
-	valor(precioEntrada, asientos);
 }
 
 function seleccionarAlimento() {
 	let carrito = [];
 	let valor = [];
 	let res = 0;
-	
+
 	let i = 0;
 	while (i < itemsDisponibles.length) {
 		let seleccion = confirm(
 			"¿Deseas agregar a la reserva " +
-				itemsDisponibles[i].producto + " ($" + itemsDisponibles[i].precio + ") " +
+				itemsDisponibles[i].producto +
+				" ($" +
+				itemsDisponibles[i].precio +
+				") " +
 				" para acompañar la pelicula?"
 		);
 
@@ -80,7 +121,7 @@ function seleccionarAlimento() {
 			valor.push(itemsDisponibles[i].precio);
 		}
 
-		i+=1;
+		i += 1;
 	}
 
 	for (let i = 0; i < valor.length; i++) {
@@ -95,29 +136,55 @@ function seleccionarAlimento() {
 		}
 	}
 
-	frase3 += " Total = <strong>$" + res + "</strong>.<br> (Podes abonar y retirar por el candy hasta 5 min antes de la pelicula).";
+	frase3 +=
+		" Total = <strong>$" +
+		res +
+		"</strong>.<br> (Podes abonar y retirar por el candy hasta 5 min antes de la pelicula).";
 	respCandy.innerHTML = frase3;
 }
 
+//Funcion Azar
 function probarSuerte() {
 	const indice = Math.floor(Math.random() * cartelera.length);
-	const peliculaAzar = cartelera[indice].toUpperCase();
-	
-	frase4 = "La pelicula seleccionada es: <strong>" + peliculaAzar + "</strong>.";
-	respAzar.innerHTML = frase4;
+	const peliculaAzar = cartelera[indice].nombre;
+	let tot;
 
 	asientos = Number(prompt("Cantidad de asientos: (valor: $500 c/u)"));
-	valor(precioEntrada, asientos);
+	tot = valor(precioEntrada, asientos);
+
+	frase4 =
+		"La Suerte dice...: <strong>¡" + peliculaAzar + "!</strong>." + "<br>" + "Cantidad de sientos: " + asientos + ". Valor total: <strong>$" + tot + "</strong>.";
+	respAzar.innerHTML = frase4;
+
+	
 }
 
-//  Ejecucion
-saludar();
+//  -----Ejecucion-----
+//Boton Registro
+let boton0 = document.querySelector("#registro");
+boton0.addEventListener("click", saludar);
 
-let boton1 = document.getElementById("seleccionar");
-boton1.onclick = comprarEntradas;
 
+//Seleccion pelicula + asientos
+const miFormulario = document.getElementById("miFormulario");
+const seleccionInput = document.getElementById("seleccionar");
+const asientosInput = document.querySelector("#cantAsientos");
+const respuestaPelicula = document.getElementById("respuestaPelicula");
+
+miFormulario.addEventListener("submit", function (event) {
+	event.preventDefault();
+
+	const peliculaSeleccionada = seleccionInput.value;
+	const cantidadAsientos = Number(asientosInput.value);
+	const total = valor(precioEntrada, cantidadAsientos)
+
+	respuestaPelicula.innerHTML = `Pelicula seleccionada: <strong>${peliculaSeleccionada}</strong>.<br> Cantidad de sientos: ${cantidadAsientos}. Valor total: <strong>$${total}</strong>.`
+});
+
+//Boton Candy
 let boton2 = document.getElementById("seleccionarCandy");
 boton2.onclick = seleccionarAlimento;
 
+//Boton Azar
 let boton3 = document.getElementById("azar");
-boton3.onclick = probarSuerte;
+boton3.addEventListener("click", probarSuerte);

@@ -34,3 +34,12 @@ h2 {
 	color: #f4d160;
 	-webkit-text-stroke: 1px black;
 }
+
+.saludo {
+	margin-top: 1rem;
+}
+
+.imgCine {
+	height: 25rem;
+	margin: 20px;
+}
