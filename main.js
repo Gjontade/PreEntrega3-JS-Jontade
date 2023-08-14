@@ -1,10 +1,9 @@
 // Declaracion de variables | Objetos | Array:
 const precioEntrada = 500;
-const respCandy = document.getElementById("respuestaCandy");
 const respAzar = document.getElementById("respuestaPelicula");
 
-let pelicula, asientos;
-let frase1, frase2, frase3, frase4;
+let asientos;
+let frase1, frase2;
 
 //Array de obj (peliculas)
 const cartelera = [
@@ -52,33 +51,16 @@ const cartelera = [
 	},
 ];
 
-//Array de obj (candy)
-const itemsDisponibles = [
-	{
-		producto: "Pochoclos",
-		precio: 200,
-	},
-	{
-		producto: "Chocolate",
-		precio: 50,
-	},
-	{
-		producto: "Gaseosa",
-		precio: 150,
-	},
-	{
-		producto: "Agua",
-		precio: 100,
-	},
-];
+//Precio Alimentos (candy)
+const preciosAlimentos = {
+	pochoclos: 200,
+	chocolate: 100,
+	gaseosa: 150,
+	agua: 50,
+};
 
-//	-----Funciones:-----
-//Funcion valor Total Asientos
-function valor(a, b) {
-	return a * b
-}
-
-//Funcion Registro
+//  [-----Ejecucion-----]
+//-----Funcion Registro-----
 function saludar() {
 	let nombreInput = document.getElementById("nombreInput");
 	let saludo = nombreInput.value.toUpperCase();
@@ -97,75 +79,22 @@ function saludar() {
 			"<br>" +
 			"(Si no sabes cual elegir, podes probar suerte 🍀)";
 		respuestaSaludar.innerHTML = mensaje;
+
+		//Guardar nombre en Local Storage
+        localStorage.setItem("nombreUsuario", saludo);
 	}
 }
 
-function seleccionarAlimento() {
-	let carrito = [];
-	let valor = [];
-	let res = 0;
-
-	let i = 0;
-	while (i < itemsDisponibles.length) {
-		let seleccion = confirm(
-			"¿Deseas agregar a la reserva " +
-				itemsDisponibles[i].producto +
-				" ($" +
-				itemsDisponibles[i].precio +
-				") " +
-				" para acompañar la pelicula?"
-		);
-
-		if (seleccion) {
-			carrito.push(itemsDisponibles[i].producto); // Metodo .push()
-			valor.push(itemsDisponibles[i].precio);
-		}
-
-		i += 1;
-	}
-
-	for (let i = 0; i < valor.length; i++) {
-		res += valor[i];
-	}
-
-	frase3 = "Reserva: <br>";
-	for (let i = 0; i < carrito.length; i++) {
-		frase3 += `${carrito[i]} ($${valor[i]})`;
-		if (i < carrito.length - 1) {
-			frase3 += " + ";
-		}
-	}
-
-	frase3 +=
-		" Total = <strong>$" +
-		res +
-		"</strong>.<br> (Podes abonar y retirar por el candy hasta 5 min antes de la pelicula).";
-	respCandy.innerHTML = frase3;
-}
-
-//Funcion Azar
-function probarSuerte() {
-	const indice = Math.floor(Math.random() * cartelera.length);
-	const peliculaAzar = cartelera[indice].nombre;
-	let tot;
-
-	asientos = Number(prompt("Cantidad de asientos: (valor: $500 c/u)"));
-	tot = valor(precioEntrada, asientos);
-
-	frase4 =
-		"La Suerte dice...: <strong>¡" + peliculaAzar + "!</strong>." + "<br>" + "Cantidad de sientos: " + asientos + ". Valor total: <strong>$" + tot + "</strong>.";
-	respAzar.innerHTML = frase4;
-
-	
-}
-
-//  -----Ejecucion-----
 //Boton Registro
 let boton0 = document.querySelector("#registro");
 boton0.addEventListener("click", saludar);
 
+//-----Funcion valor Total Asientos-----
+function valor(a, b) {
+	return a * b;
+}
 
-//Seleccion pelicula + asientos
+//-----Seleccion pelicula + asientos-----
 const miFormulario = document.getElementById("miFormulario");
 const seleccionInput = document.getElementById("seleccionar");
 const asientosInput = document.querySelector("#cantAsientos");
@@ -176,15 +105,119 @@ miFormulario.addEventListener("submit", function (event) {
 
 	const peliculaSeleccionada = seleccionInput.value;
 	const cantidadAsientos = Number(asientosInput.value);
-	const total = valor(precioEntrada, cantidadAsientos)
+	const total = valor(precioEntrada, cantidadAsientos);
 
-	respuestaPelicula.innerHTML = `Pelicula seleccionada: <strong>${peliculaSeleccionada}</strong>.<br> Cantidad de sientos: ${cantidadAsientos}. Valor total: <strong>$${total}</strong>.`
+	respuestaPelicula.innerHTML = `<strong>Reserva:</strong> <br> Pelicula seleccionada: <strong>${peliculaSeleccionada}</strong>.<br> Cantidad de sientos: ${cantidadAsientos}. Valor total: <strong>$${total}</strong>.`;
+
+	// Guardar datos en Local Storage
+    localStorage.setItem("peliculaSeleccionada", peliculaSeleccionada);
+    localStorage.setItem("cantidadAsientos", cantidadAsientos);
 });
 
-//Boton Candy
-let boton2 = document.getElementById("seleccionarCandy");
-boton2.onclick = seleccionarAlimento;
+//-----Funcion Azar-----
+function probarSuerte() {
+	const indice = Math.floor(Math.random() * cartelera.length);
+	const peliculaAzar = cartelera[indice].nombre;
+	let tot;
+
+	asientos = Number(prompt("Cantidad de asientos: (valor: $500 c/u)"));
+	tot = valor(precioEntrada, asientos);
+
+	frase1 =
+		"La Suerte dice...: <strong>¡" +
+		peliculaAzar +
+		"!</strong>." +
+		"<br>" +
+		"Cantidad de sientos: " +
+		asientos +
+		". Valor total: <strong>$" +
+		tot +
+		"</strong>.";
+	respAzar.innerHTML = frase1;
+
+	//Guardar datos en Local Storage
+    localStorage.setItem("peliculaAzar", peliculaAzar);
+    localStorage.setItem("asientos", asientos);
+    localStorage.setItem("total", tot);
+}
 
 //Boton Azar
 let boton3 = document.getElementById("azar");
 boton3.addEventListener("click", probarSuerte);
+
+//-----Seleccion Candy-----
+const formularioCandy = document.querySelector("#formularioCandy");
+const confirmarAlimentos = document.querySelector("#confirmarCandy");
+const respCandy = document.querySelector("#respuestaCandy");
+
+confirmarAlimentos.addEventListener("click", () => {
+	let carrito = [];
+	let parcial = [];
+	let final = 0;
+
+	formularioCandy
+		.querySelectorAll("input[type='checkbox']")
+		.forEach(function (checkbox) {
+			if (checkbox.checked) {
+				const alimento = checkbox.value;
+				const precio = preciosAlimentos[alimento];
+
+				carrito.push(alimento);
+				parcial.push(precio);
+			}
+		});
+
+	//Calcular Total
+	for (let i = 0; i < parcial.length; i++) {
+		final += parcial[i];
+	}
+
+	frase2 = "-----Candy----- <br>";
+	for (let i = 0; i < carrito.length; i++) {
+		frase2 += `${carrito[i]} ($${parcial[i]})`;
+		if (i < carrito.length - 1) {
+			frase2 += " + ";
+		}
+	}
+
+	frase2 +=
+		" Total = <strong>$" +
+		final +
+		"</strong>.<br> (Podes abonar y retirar por el candy hasta 5 min antes de la pelicula).";
+	respCandy.innerHTML = frase2;
+});
+
+
+// -----JSON y Carga de datos almacenados en Local Storage
+window.addEventListener("load", function () {
+	//carga saludo
+    const cargaSaludo = localStorage.getItem("nombreUsuario");
+	const cargaRespuestaSaludo = document.getElementById("cargaRespuestaSaludo");
+
+    if (cargaSaludo) {
+        document.getElementById("nombreInput").value = cargaSaludo;
+        //saludar();
+		cargaRespuestaSaludo.innerHTML = `¡Hola <strong>${cargaSaludo}</strong>! ¿So' vo' todavia?. (Si no sos, ingresa un nuevo nombre) <br> Guardamos tu seleccion pero si queres cambiarla... ¡estas a tiempo loquito! <br> No te olvides de seleccionar el candy. 😉`
+
+		// este evento borra los datos si se introduce un nuevo nombre
+		nombreInput.addEventListener("input", () => {
+			cargaRespuestaSaludo.innerHTML = "";
+			respuestaPelicula.innerHTML = "";
+			respAzar.innerHTML = "";
+
+		});
+    }
+	
+	//carga pelicula + asiento
+	const cargaPeliculaSeleccionada = localStorage.getItem("peliculaSeleccionada");
+    const cargaCantidadAsientos = localStorage.getItem("cantidadAsientos");
+    if (cargaPeliculaSeleccionada && cargaCantidadAsientos) {
+		respuestaPelicula.innerHTML = `<strong>Reserva:</strong> <br> Pelicula seleccionada: <strong>${cargaPeliculaSeleccionada}</strong>.<br> Cantidad de sientos: ${cargaCantidadAsientos}. Valor total: <strong>$${valor(precioEntrada, cargaCantidadAsientos)}</strong>.`;
+    }
+	
+	//carga azar
+	const cargaPeliculaAzar = localStorage.getItem("peliculaAzar");
+	if (cargaPeliculaAzar) {
+		respAzar.innerHTML = `La Suerte dice...: <strong>¡${cargaPeliculaAzar}!</strong>.<br>Cantidad de sientos: ${localStorage.getItem("asientos")}. Valor total: <strong>$${localStorage.getItem("total")}</strong>.`;
+	}
+});

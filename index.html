@@ -35,10 +35,11 @@
 			</nav>
 		</header>
 
-		<main class="container-fluid">
-			<section>
-				<h2>Bienvenido/a a Cine+</h2>
-				<div class="input-group mb-3" style="width: 35%" id="respuesta">
+		<main class="container-fluid text-fluid">
+			<section class="row">
+				<h2 class="mx-auto m-3">Bienvenido/a a Cine+</h2>
+				<div class="mb-3" id="cargaRespuestaSaludo"></div>
+				<div class="input-group text-fluid mb-3 inputSaludo" id="respuesta">
 					<input
 						type="text"
 						class="form-control"
@@ -52,7 +53,7 @@
 				</div>
 			</section>
 			<section>
-				<div class="form" style="width: 20%">
+				<div class="form" style="width: 15rem">
 					<form class="d-inline-block" id="miFormulario">
 						<select
 							class="form-select mb-3"
@@ -68,22 +69,42 @@
 						</select>
 						<input
 							type="number"
-							class="form-control border border-warning border-5 mb-3"
+							class="form-control border border-warning border-5 mb-3 text-center"
 							placeholder="Asientos: (c/u $500)"
 							min="1"
 							style="width: 85%" 
 							id="cantAsientos"/>
 						<button type="submit" class="btn btn-primary mb-3">confirmar</button>
+						<button type="button" class="btn btn-outline-success mb-3" id="azar">
+							¡Proba Suerte!
+						</button>
 					</form>
-					<button type="button" class="btn btn-outline-success mb-3" id="azar">
-						¡Proba Suerte!
-					</button>
-					<button
-						type="button"
-						class="btn btn-outline-warning mb-3"
-						id="seleccionarCandy">
-						Candy
-					</button>
+				</div>
+
+				<div>
+					<form id="formularioCandy">
+						<fieldset>
+							<legend>Selecciona los alimentos:</legend>
+							<!-- Checkboxes alimentos -->
+							<div>
+								<input class="form-check-input" type="checkbox" id="pochoclos" value="pochoclos">
+								<label for="pochoclos">Pochoclos ($200)</label>
+							</div>
+							<div>
+								<input class="form-check-input" type="checkbox" id="chocolate" value="chocolate">
+								<label for="chocolate">Chocolate ($100)</label>
+							</div>
+							<div>
+								<input class="form-check-input" type="checkbox" id="gaseosa" value="gaseosa">
+								<label for="gaseosa">Gaseosa ($150)</label>
+							</div>
+							<div>
+								<input class="form-check-input" type="checkbox" id="agua" value="agua">
+								<label for="agua">Agua ($50)</label>
+							</div>
+						</fieldset>
+						<button type="button" class="btn btn-outline-warning m-3" id="confirmarCandy">confirmar</button>
+					</form>
 				</div>
 				
 				<div>
@@ -93,32 +114,32 @@
 				</div>
 			</section>
 
-			<section>
-				<div class="container-fluid d-flex justify-content-around flex-wrap">
+			<section class="container">
+				<div class="row">
 					<img
 						src="./img/cartelera-jp.webp"
 						alt="cartelera pelicula"
-						class="col-3 imgCine" />
+						class="col-4 m-3 img-fluid mx-auto imgCine" />
 					<img
 						src="./img/cartelera-rocky.webp"
 						alt="cartelera pelicula"
-						class="col-3 imgCine" />
+						class="col-4 m-3 img-fluid mx-auto imgCine" />
 					<img
 						src="./img/cartelera-titanic.webp"
 						alt="cartelera pelicula"
-						class="col-3 imgCine" />
+						class="col-4 m-3 img-fluid mx-auto imgCine" />
 					<img
 						src="./img/cartelera-topgun.webp"
 						alt="cartelera pelicula"
-						class="col-3 imgCine" />
+						class="col-4 m-3 img-fluid mx-auto imgCine" />
 					<img
 						src="./img/cartelera-mi3.webp"
 						alt="cartelera pelicula"
-						class="col-3 imgCine" />
+						class="col-4 m-3 img-fluid mx-auto imgCine" />
 					<img
 						src="./img/cartelera-karatekid.webp"
 						alt="cartelera pelicula"
-						class="col-3 imgCine" />
+						class="col-4 m-3 img-fluid mx-auto imgCine" />
 				</div>
 			</section>
 		</main>

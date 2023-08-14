@@ -29,17 +29,22 @@ h1 {
 }
 
 h2 {
-	margin: 1rem;
 	text-align: center;
 	color: #f4d160;
 	-webkit-text-stroke: 1px black;
+	font-size: 2rem;
 }
 
 .saludo {
 	margin-top: 1rem;
 }
 
-.imgCine {
-	height: 25rem;
-	margin: 20px;
+legend {
+	color: #f4d160;
+	-webkit-text-stroke: 1px black;
+	font-size: 1.8rem;;
+}
+
+.inputSaludo {
+	width: 25rem;
 }
